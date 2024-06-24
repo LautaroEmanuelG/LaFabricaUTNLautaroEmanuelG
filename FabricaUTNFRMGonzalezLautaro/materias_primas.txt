@@ -1,4 +1,5 @@
-Bronce,1
+Bronce,2
 Plata,4
 Oro,2
 Estaño,3
+Cobre,4

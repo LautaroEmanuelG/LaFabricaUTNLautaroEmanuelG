@@ -1,4 +1,4 @@
 Lingote de Plata,Plata
 Lingote de Bronce,Bronce
-Esposas,Plata,Lingote de Plata
 Cadena de Bronce,Oro,Lingote de Bronce
+Esposas,Plata,Lingote de Plata
