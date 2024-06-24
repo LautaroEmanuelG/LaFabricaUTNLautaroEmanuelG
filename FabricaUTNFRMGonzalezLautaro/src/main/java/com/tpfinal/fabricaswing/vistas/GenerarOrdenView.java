@@ -208,7 +208,7 @@ public class GenerarOrdenView extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList<>();
 
-        setMaximumSize(new java.awt.Dimension(300, 500));
+        setMaximumSize(new java.awt.Dimension(9000, 500));
         setPreferredSize(new java.awt.Dimension(300, 500));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -478,7 +478,18 @@ public class GenerarOrdenView extends javax.swing.JPanel {
 
             try {
                 int cantidad = Integer.parseInt(jTextField2.getText());
-
+                try {
+                    //Cantidad no puede ser negativa ni caracteres especiales
+                    if (cantidad < 0) {
+                        throw new IllegalArgumentException("Existencia no puede ser negativa.");
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Existencia debe ser un número entero.");
+                    return;
+                } catch (IllegalArgumentException e) {
+                    JOptionPane.showMessageDialog(this, e.getMessage());
+                    return;
+                }
                 // Crear una copia de la lista original de materias primas
                 List<MateriaPrima> materiasPrimasCopia = new ArrayList<>();
                 for (MateriaPrima materiaPrima : materiasPrimas) {

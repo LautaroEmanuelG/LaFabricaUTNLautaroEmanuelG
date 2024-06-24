@@ -310,6 +310,12 @@ public class AgregarProductoView extends javax.swing.JPanel {
             return;
         }
 
+        // Validar que el nombre no contenga una coma ni otros caracteres especiales no permitidos
+        if (nombreProducto.contains(",") || nombreProducto.contains(";") || nombreProducto.contains(":")) {
+            JOptionPane.showMessageDialog(this, "El nombre no puede contener comas ni caracteres especiales como ; :.");
+            return;
+        }
+
         if (existeProducto(nombreProducto)) {
             JOptionPane.showMessageDialog(this, "Ya existe un producto con ese nombre.");
             return;

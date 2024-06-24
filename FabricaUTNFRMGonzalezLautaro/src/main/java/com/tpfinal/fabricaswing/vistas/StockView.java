@@ -344,14 +344,27 @@ public class StockView extends javax.swing.JPanel {
             return;
         }
 
-        int existencia;
-        try {
-            existencia = Integer.parseInt(existenciaStr);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Existencia debe ser un número entero.");
+        // Validar que el nombre no contenga una coma ni otros caracteres especiales no permitidos
+        if (nombre.contains(",") || nombre.contains(";") || nombre.contains(":")) {
+            JOptionPane.showMessageDialog(this, "El nombre no puede contener comas ni caracteres especiales como ; :.");
             return;
         }
 
+        int existencia;
+        try {
+            existencia = Integer.parseInt(existenciaStr);
+            if (existencia < 0) {
+                throw new IllegalArgumentException("Existencia no puede ser negativa.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Existencia debe ser un número entero.");
+            return;
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            return;
+        }
+
+        //Revisar si encuentra coincidencia carga datos
         for (MateriaPrima materia : materiasPrimas) {
             if (materia.getNombre().equalsIgnoreCase(nombre)) {
                 materia.setExistencia(materia.getExistencia() + existencia);
@@ -361,6 +374,7 @@ public class StockView extends javax.swing.JPanel {
             }
         }
 
+        //Carga Datos a una nueva materia prima
         MateriaPrima nuevaMateria = new MateriaPrima(nombre, existencia);
         materiasPrimas.add(nuevaMateria);
         actualizarListas();
